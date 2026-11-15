@@ -93,9 +93,9 @@ export const tanya = {
   closer: "That little whisper telling you that you were meant for something more? Let’s go get it.",
   voiceNote: {
     label: "Hear how Tanya answers",
-    question: "Hey Tanya, how do i relax without feeling guilty or lazy?",
-    src: "/tanya-voice-note.mp3",
-    duration: "0:11",
+    question: "Hey Tanya, why do I feel like I'm never doing enough, even when I'm trying my best?",
+    src: "/tanya-voice-note.m4a",
+    duration: "0:12",
   },
 };
 
