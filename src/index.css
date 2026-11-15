@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-tide-600 ring-offset-2 ring-offset-white;
+  }
+
+  ::selection {
+    @apply bg-tide-200 text-ink;
+  }
+
+  [id] {
+    scroll-margin-top: 4rem;
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-[1120px] px-[max(1.375rem,env(safe-area-inset-left))] sm:px-8;
+  }
+
+  /* Type scale: few sizes, very large, tightly tracked */
+  .display-xl {
+    @apply text-[clamp(3.25rem,11.5vw,8.5rem)] font-semibold leading-[0.98] tracking-display;
+  }
+  .display-lg {
+    @apply text-[clamp(2.5rem,7.4vw,5.5rem)] font-semibold leading-[1.03] tracking-display;
+  }
+  .display-md {
+    @apply text-[clamp(1.9rem,4.6vw,3.25rem)] font-semibold leading-[1.08] tracking-tightish;
+  }
+  .lede {
+    @apply text-[clamp(1.2rem,2.2vw,1.65rem)] font-medium leading-[1.3] tracking-tightish text-ink-muted;
+  }
+  .eyebrow {
+    @apply text-[0.95rem] font-semibold tracking-tightish text-tide-600 sm:text-lg;
+  }
+
+  /* Teal → blush → peach: the sunset over the water */
+  .text-sunset {
+    background-image: linear-gradient(100deg, #0b7d78 0%, #18a79f 28%, #e2849f 68%, #f0a66c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* keep descenders inside the clipped box */
+    padding-bottom: 0.08em;
+  }
+
+  .btn {
+    @apply inline-flex min-h-[3.25rem] cursor-pointer items-center justify-center gap-2.5 rounded-full bg-tide-600 px-7 text-[1.0625rem] font-semibold text-white shadow-cta transition duration-200 ease-out hover:bg-tide-700 active:scale-[0.97] motion-reduce:transition-none;
+    touch-action: manipulation;
+  }
+  .btn-sm {
+    @apply min-h-[2rem] px-3.5 text-[0.8125rem] shadow-none;
+  }
+
+  /* The "Text TanyaTalk" button is itself a speech bubble, like its chat icon: a pill with a small
+     tail at the bottom left. drop-shadow (not box-shadow) so the tail gets the shadow too. */
+  .btn-bubble {
+    @apply relative shadow-none;
+    filter: drop-shadow(0 8px 14px rgba(11, 125, 120, 0.35));
+  }
+  .btn-bubble.btn-sm {
+    filter: none;
+  }
+
+  .text-link {
+    @apply inline-flex min-h-[2.75rem] cursor-pointer items-center gap-1 rounded text-[1.0625rem] font-medium text-tide-600 transition-colors hover:text-tide-800;
+  }
+  .text-link::after {
+    content: "›";
+    @apply translate-y-[-1px] text-[1.2em] transition-transform duration-200;
+  }
+  .text-link:hover::after {
+    @apply translate-x-0.5;
+  }
+
+  /* Pinned scenes: exactly the visible screen. svh excludes mobile browser
+     toolbars; the vh line is only a fallback for browsers without svh. */
+  .stage {
+    height: 100vh;
+    height: 100svh;
+  }
+
+  .tile {
+    @apply relative overflow-hidden rounded-[1.75rem] bg-mist sm:rounded-[2rem];
+  }
+
+  /* iMessage-style bubbles (stylised, not an Apple asset): a rounded pill with a curled tail at the
+     bottom corner, sent on the right in blue, received on the left in gray. */
+  .bubble {
+    @apply relative rounded-[1.15em] px-[0.85em] py-[0.5em] text-left leading-[1.3];
+  }
+  .bubble-sent {
+    @apply bg-[#0a84ff] text-white;
+  }
+  .bubble-recv {
+    @apply bg-[#e9e9eb] text-ink;
+  }
+}
+
+/* The tail is a mask shape filled with the bubble's own colour, so it works on any background. */
+.btn-bubble::after,
+.bubble-sent::after,
+.bubble-recv::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 0.95em;
+  height: 1.15em;
+  background: inherit;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 19 22'%3E%3Cpath d='M0 0h9c0 9 2 16 10 21.5-7 1.1-13.5-.5-18-4H0z'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 19 22'%3E%3Cpath d='M0 0h9c0 9 2 16 10 21.5-7 1.1-13.5-.5-18-4H0z'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+  pointer-events: none;
+}
+.bubble-sent::after {
+  right: -0.4em;
+}
+.bubble-recv::after {
+  left: -0.4em;
+  transform: scaleX(-1);
+}
+/* the button's tail sits a little in from the corner, like the chat icon's */
+.btn-bubble::after {
+  left: 0.55em;
+  bottom: -0.32em;
+  width: 0.9em;
+  height: 0.9em;
+  transform: scaleX(-1) rotate(8deg);
+}
+.btn-bubble.btn-sm::after {
+  left: 0.45em;
+  bottom: -0.28em;
+}
+
+/* Horizontal card gallery */
+.rail {
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
