@@ -48,7 +48,7 @@ export const realStuff = {
   lead: "Nobody prepares you for the real stuff.",
   lines: ["Getting what you want.", "Trusting your decisions.", "Deciding who you’re becoming."],
   answer:
-    "TanyaTalk is personal coaching, backed by nearly a decade of Tanya Wannemacher’s professional expertise and the full depth of her heart. Used by the real Tanya in her life coaching program. In your iMessage, 24/7.",
+    "TanyaTalk is a personal coaching tool, backed by nearly a decade of Tanya Wannemacher’s professional expertise. In your iMessage, 24/7. Used by the real Tanya in her life coaching program.",
 };
 
 export const demo = {
