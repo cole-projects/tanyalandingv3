@@ -63,11 +63,24 @@ export default {
         fall: {
           to: { transform: "translate3d(var(--x, 0), 105vh, 0) rotate(540deg)", opacity: "0" },
         },
+        /** Sale ribbon: flakes drift down through the bar, a soft sheen sweeps across it */
+        snow: {
+          "0%": { transform: "translate3d(0, -12px, 0)", opacity: "0" },
+          "15%": { opacity: "var(--o, 0.8)" },
+          "85%": { opacity: "var(--o, 0.8)" },
+          "100%": { transform: "translate3d(var(--drift, 8px), 72px, 0)", opacity: "0" },
+        },
+        sheen: {
+          "0%": { transform: "translateX(-100%)" },
+          "60%, 100%": { transform: "translateX(100%)" },
+        },
       },
       animation: {
         dot: "dot 1.2s ease-in-out infinite",
         nudge: "nudge 2.2s ease-in-out infinite",
         fall: "fall 2.4s ease-in forwards",
+        snow: "snow var(--d, 6s) linear infinite",
+        sheen: "sheen 7s ease-in-out infinite",
       },
     },
   },

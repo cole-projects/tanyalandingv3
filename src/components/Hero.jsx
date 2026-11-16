@@ -94,7 +94,7 @@ function TypingDots() {
 /** Reduced motion: the same content, stacked and still. */
 function StaticHero() {
   return (
-    <section id="top" aria-label="TanyaTalk introduction" className="pb-20 pt-28">
+    <section id="top" aria-label="TanyaTalk introduction" className="pb-20 pt-[calc(7rem+var(--ribbon-h,0px))]">
       <Intro />
       <div className="wrap mt-16 flex max-w-[40rem] flex-col gap-3 text-[clamp(1.1rem,3.2vw,1.6rem)]">
         <p className="text-center text-sm font-medium text-ink-faint">{hero.chat.stamp}</p>

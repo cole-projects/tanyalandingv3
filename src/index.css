@@ -32,7 +32,8 @@
   }
 
   [id] {
-    scroll-margin-top: 4rem;
+    /* --ribbon-h is set by the sale ribbon while it is showing */
+    scroll-margin-top: calc(4rem + var(--ribbon-h, 0px));
   }
 }
 

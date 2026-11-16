@@ -107,11 +107,25 @@ export const becomingYou = {
   cta: "Call or text Tanya directly",
 };
 
+/**
+ * Black Friday: the ribbon and FAQ line show only until `end` (Dec 1, 11:59pm Eastern),
+ * then disappear on their own. Matches the bot's PROMO_END and the Stripe code.
+ */
+export const sale = {
+  end: Date.parse("2026-12-01T23:59:59-05:00"),
+  code: "BLACKFRIDAY",
+  was: "$21",
+  now: "$10",
+};
+export const saleIsOn = () => Date.now() < sale.end;
+
 /** Answers come from the Terms letter (public/terms.html). */
 export const faq = [
   {
     q: "Is it really free to start?",
-    a: "Yes. Your first 15 messages require no credit card and no signup. If you want to keep going after that, a subscription is $21 per month, and you will never be charged without choosing to continue.",
+    a: saleIsOn()
+      ? `Yes. Your first 15 messages require no credit card and no signup. If you want to keep going after that, a subscription is normally $21 per month. Through December 1, you can lock in $10 per month for life. Tanya will send you the Black Friday code when your free messages are done. You will never be charged without choosing to continue.`
+      : "Yes. Your first 15 messages require no credit card and no signup. If you want to keep going after that, a subscription is $21 per month, and you will never be charged without choosing to continue.",
   },
   {
     q: "How do I cancel?",
