@@ -75,6 +75,13 @@ const isIOS =
   typeof navigator !== "undefined" &&
   (/iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1));
 
+/**
+ * Desktop (mouse and trackpad): sound comes on only from the "Tap for sound" button, so a
+ * "WatchedDemo" there means someone chose to listen. Phones keep their tap-anywhere behavior.
+ */
+const isDesktop =
+  typeof window !== "undefined" && Boolean(window.matchMedia?.("(hover: hover) and (pointer: fine)").matches);
+
 /** Has the visitor interacted with the page at all yet? */
 function pageActivated() {
   return navigator.userActivation?.hasBeenActive ?? hasTapped;
@@ -218,7 +225,7 @@ function DemoVideo({ active = false }) {
             const playingNow = event.data === YT.PlayerState.PLAYING;
             const buffering = event.data === YT.PlayerState.BUFFERING;
             setPlaying(playingNow || buffering);
-            if (playingNow) {
+            if (playingNow && !isDesktop) {
               // Sound without a fresh tap: only where the browser will allow it,
               // so phones that would refuse are never made to stall.
               const allowed = soundGranted.current || (!isIOS && pageActivated());
@@ -238,6 +245,7 @@ function DemoVideo({ active = false }) {
 
     // Any real tap while the video is playing muted: switch the sound on, inside the tap.
     const stopTap = onTap(() => {
+      if (isDesktop) return;
       if (!activeRef.current || userPaused.current || userMuted.current || !mutedRef.current) return;
       if (!startedRef.current) return;
       if (!tracked.current) {
@@ -319,7 +327,7 @@ function DemoVideo({ active = false }) {
       userPaused.current = false;
       startedRef.current = true;
       player.playVideo();
-      if (!userMuted.current) requestSound();
+      if (!userMuted.current && !isDesktop) requestSound();
     }
   };
 
@@ -404,6 +412,7 @@ function NativeDemoVideo({ active = false }) {
   useEffect(
     () =>
       onTap(() => {
+        if (isDesktop) return;
         const v = videoRef.current;
         if (!v || !activeRef.current || userPaused.current || userMuted.current || !v.muted) return;
         if (!tracked.current) {
