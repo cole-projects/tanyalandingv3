@@ -124,7 +124,7 @@ export const faq = [
   {
     q: "Is it really free to start?",
     a: saleIsOn()
-      ? `Yes. Your first 15 messages require no credit card and no signup. If you want to keep going after that, a subscription is normally $21 per month. Through December 1, you can lock in $10 per month for life. Tanya will send you the Black Friday code when your free messages are done. You will never be charged without choosing to continue.`
+      ? `Yes. Your first 15 messages require no credit card and no signup. If you want to keep going after that, a subscription is normally $21 per month. Through December 1, you can lock in $10 per month for life. The Black Friday price is applied automatically when you subscribe. You will never be charged without choosing to continue.`
       : "Yes. Your first 15 messages require no credit card and no signup. If you want to keep going after that, a subscription is $21 per month, and you will never be charged without choosing to continue.",
   },
   {
