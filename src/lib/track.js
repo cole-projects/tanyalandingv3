@@ -1,7 +1,10 @@
 import { SMS_LINK } from "../content/site.js";
 
 /** Fires the Meta Pixel event in the browser and mirrors it server-side (api/track.js) with the same id. */
+const IS_LIVE_SITE = /(^|\.)tanya-talk\.com$/.test(globalThis.location?.hostname ?? "");
+
 export function track(eventName) {
+  if (!IS_LIVE_SITE) return; // local previews and Vercel test links stay out of Meta
   const eventId =
     globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(16).slice(2)}`;
   window.fbq?.("trackCustom", eventName, {}, { eventID: eventId });
