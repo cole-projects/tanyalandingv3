@@ -3,8 +3,8 @@
  * the facts and claims are unchanged. Quotes are kept word for word.
  */
 
-/** iMessage deep link: opens Messages with "hey tanya" ready to send */
-export const SMS_LINK = "sms:+13177282783&body=hey%20tanya";
+/** Messages deep link with "hey tanya" ready to send. "?&body=" works on both iPhone and Android. */
+export const SMS_LINK = "sms:+13177282783?&body=hey%20tanya";
 export const SMS_NUMBER_DISPLAY = "(317) 728-2783";
 /** Tanya's direct line, used only for the BecomingYOU program */
 export const DIRECT_SMS_LINK = "sms:+15627149917";
